@@ -33,5 +33,9 @@
 	},
 	"tsd": {
 		"directory": "test"
-	}
+	},
+	"pre-commit": [
+		"lint",
+		"test"
+	]
 }
