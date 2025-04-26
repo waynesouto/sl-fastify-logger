@@ -1,5 +1,5 @@
 {
-	"name": "fastify-logger",
+	"name": "fastify-xlog",
 	"version": "1.0.0",
 	"description": "Fastify logger plugin for logging requests",
 	"main": "index.js",
