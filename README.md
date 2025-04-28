@@ -1,4 +1,4 @@
-# @specter-labs/fastify-logger
+# Fastify Logger
 
 [![NPM Downloads](https://img.shields.io/npm/d18m/%40specter-labs%2Ffastify-logger?style=flat-square&logo=npm)](https://www.npmjs.com/package/@specter-labs/fastify-logger)
 [![NPM License](https://img.shields.io/npm/l/%40specter-labs%2Ffastify-logger?style=flat-square&logo=npm)](https://www.npmjs.com/package/@specter-labs/fastify-logger)
