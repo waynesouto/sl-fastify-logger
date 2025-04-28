@@ -41,5 +41,5 @@ function fastifyLogger(fastify, options) {
 
 export default fp(fastifyLogger, {
 	fastify: '5.x',
-	name: 'fastify-xlog'
+	name: 'fastify-logger'
 })
