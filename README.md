@@ -1,6 +1,8 @@
-# fastify-xlog
+# @specter-labs/fastify-logger
 
-[![NPM version](https://img.shields.io/npm/v/fastify-xlog.svg?style=flat)](https://www.npmjs.com/package/fastify-xlog)
+[![NPM Downloads](https://img.shields.io/npm/d18m/%40specter-labs%2Ffastify-logger?style=flat-square&logo=npm)](https://www.npmjs.com/package/@specter-labs/fastify-logger)
+[![NPM License](https://img.shields.io/npm/l/%40specter-labs%2Ffastify-logger?style=flat-square&logo=npm)](https://www.npmjs.com/package/@specter-labs/fastify-logger)
+[![NPM Version](https://img.shields.io/npm/v/%40specter-labs%2Ffastify-logger?style=flat-square&logo=npm)](https://www.npmjs.com/package/@specter-labs/fastify-logger)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Advanced HTTP request logging plugin for Fastify with support for custom contexts and flexible configuration.
@@ -8,25 +10,25 @@ Advanced HTTP request logging plugin for Fastify with support for custom context
 ## Install
 
 ```bash
-npm i fastify-xlog
+npm i @specter-labs/fastify-logger
 ```
 
 ## Usage
 
 ```js
 import Fastify from 'fastify'
-import fastifyXlog from 'fastify-xlog'
+import logger from '@specter-labs/fastify-logger'
 
 const fastify = Fastify()
 
 // Register the plugin with default options
-await fastify.register(fastifyXlog)
+await fastify.register(logger)
 
 // Or with custom options
-await fastify.register(fastifyXlog, {
+await fastify.register(logger, {
   level: 'info',
   prefix: 'api',
-  ignoreStatusCodes: [404],
+  ignoreStatusCodes: [400],
   adapter: {
     log: (message) => console.log(message),
     error: (message) => console.error(message)
@@ -57,7 +59,7 @@ const customAdapter = {
   }
 }
 
-await fastify.register(fastifyXlog, { adapter: customAdapter })
+await fastify.register(logger, { adapter: customAdapter })
 ```
 
 ## Log Format
