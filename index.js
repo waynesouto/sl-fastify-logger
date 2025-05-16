@@ -27,6 +27,9 @@ function fastifyLogger(fastify, options) {
 
 		if (reply.error !== undefined) {
 			message += ` | ${reply.error.message}`
+			if (options.logRequestPayload) {
+				message += ` | ${JSON.stringify(request.body)}`
+			}
 			adapter.error(message)
 
 			return

@@ -28,6 +28,12 @@ declare namespace fastifyLogger {
 		 * Prefix for the log messages
 		 */
 		prefix?: string
+
+		/**
+		 * Logs the request payload for error responses
+		 * @default false
+		 */
+		logRequestPayload?: boolean
 	}
 
 	export const fastifyLogger: FastifyLoggerPlugin

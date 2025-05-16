@@ -44,6 +44,7 @@ await fastify.register(logger, {
 | `prefix` | `undefined` | Optional prefix for log messages |
 | `ignoreStatusCodes` | `[]` | Array of HTTP status codes to ignore |
 | `adapter` | `{ log: fastify.log.info, error: fastify.log.error }` | Custom logging adapter implementation |
+| `logRequestPayload` | `false` | When enabled, logs the request payload for error responses |
 
 ### Custom Adapter
 

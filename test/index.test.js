@@ -3,7 +3,7 @@ import { test } from 'node:test'
 
 import logger from '../index.js'
 
-test('Should log requests with default format', async t => {
+test('Should log requests with default format', async(t) => {
 	t.plan(3)
 
 	const app = fastify()
@@ -24,7 +24,7 @@ test('Should log requests with default format', async t => {
 	t.assert.strictEqual(res.payload, 'ok')
 })
 
-test('Should log errors when present', async t => {
+test('Should log errors when present', async(t) => {
 	t.plan(1)
 
 	const app = fastify()
@@ -49,7 +49,7 @@ test('Should log errors when present', async t => {
 	t.assert.strictEqual(logs.length, 1)
 })
 
-test('Should respect ignoreStatusCodes', async t => {
+test('Should respect ignoreStatusCodes', async(t) => {
 	t.plan(1)
 
 	const app = fastify()
@@ -74,7 +74,7 @@ test('Should respect ignoreStatusCodes', async t => {
 	t.assert.strictEqual(logs.length, 0)
 })
 
-test('Should include prefix when configured', async t => {
+test('Should include prefix when configured', async(t) => {
 	t.plan(1)
 
 	const app = fastify()
@@ -99,7 +99,7 @@ test('Should include prefix when configured', async t => {
 	t.assert.ok(logs[0].includes('[TEST]'))
 })
 
-test('Should respect log level', async t => {
+test('Should respect log level', async(t) => {
 	t.plan(2)
 
 	const app = fastify()
@@ -137,7 +137,38 @@ test('Should respect log level', async t => {
 	t.assert.strictEqual(logs.length, 1)
 })
 
-test('Should cover all function paths', async t => {
+test('Should log request payload when logRequestPayload is enabled', async(t) => {
+	t.plan(1)
+
+	const app = fastify()
+	const logs = []
+
+	app.post('/with-payload', async(_req, reply) => {
+		reply.error = new Error('Payload error')
+		reply.send('error')
+	})
+
+	app.register(logger, {
+		logRequestPayload: true,
+		adapter: {
+			error: (msg) => logs.push(msg)
+		}
+	})
+
+	const payload = { test: 'data' }
+	await app.inject({
+		method: 'POST',
+		url: '/with-payload',
+		payload
+	})
+
+	t.assert.ok(
+		logs[0].includes(JSON.stringify(payload)),
+		'Should include request payload in error log'
+	)
+})
+
+test('Should cover all function paths', async(t) => {
 	t.plan(3)
 
 	const app = fastify()
