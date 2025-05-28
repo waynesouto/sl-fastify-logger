@@ -1,6 +1,6 @@
 {
 	"name": "@specter-labs/fastify-logger",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Fastify logger plugin for logging requests",
 	"main": "index.js",
 	"type": "module",
