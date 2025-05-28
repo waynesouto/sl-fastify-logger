@@ -137,6 +137,43 @@ test('Should respect log level', async(t) => {
 	t.assert.strictEqual(logs.length, 1)
 })
 
+test('Should respect ignorePaths', async(t) => {
+	t.plan(2)
+
+	const app = fastify()
+	const logs = []
+
+	app.get('/metrics/health', (_req, reply) => {
+		reply.send('ok')
+	})
+
+	app.get('/api/data', (_req, reply) => {
+		reply.send('data')
+	})
+
+	app.register(logger, {
+		ignorePaths: ['/metrics'],
+		adapter: {
+			log: (msg) => logs.push(msg)
+		}
+	})
+
+	// This request should be ignored because path starts with /metrics
+	await app.inject({
+		method: 'GET',
+		url: '/metrics/health'
+	})
+
+	// This request should be logged
+	await app.inject({
+		method: 'GET',
+		url: '/api/data'
+	})
+
+	t.assert.strictEqual(logs.length, 1, 'Should only log non-ignored paths')
+	t.assert.ok(logs[0].includes('/api/data'), 'Should log the non-ignored path')
+})
+
 test('Should log request payload when logRequestPayload is enabled', async(t) => {
 	t.plan(1)
 

@@ -7,9 +7,13 @@ function fastifyLogger(fastify, options) {
 	}
 	const level = options.level || 'info'
 	const ignoreStatusCodes = options.ignoreStatusCodes || []
+	const ignorePaths = options.ignorePaths || []
 
 	fastify.addHook('onResponse', async(request, reply) => {
-		if (ignoreStatusCodes.includes(reply.statusCode)) {
+		if (
+			ignoreStatusCodes.includes(reply.statusCode) ||
+			ignorePaths.some(path => request.url.startsWith(path))
+		) {
 			return
 		}
 

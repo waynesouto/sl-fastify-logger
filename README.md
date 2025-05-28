@@ -43,6 +43,7 @@ await fastify.register(logger, {
 | `level` | `'info'` | The logging level. Can be `'info'` or `'error'` |
 | `prefix` | `undefined` | Optional prefix for log messages |
 | `ignoreStatusCodes` | `[]` | Array of HTTP status codes to ignore |
+| `ignorePaths` | `[]` | Array of URL paths to ignore. If a request URL starts with any of these paths, it won't be logged |
 | `adapter` | `{ log: fastify.log.info, error: fastify.log.error }` | Custom logging adapter implementation |
 | `logRequestPayload` | `false` | When enabled, logs the request payload for error responses |
 

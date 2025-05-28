@@ -25,6 +25,11 @@ declare namespace fastifyLogger {
 		ignoreStatusCodes?: number[]
 
 		/**
+		 * An array of URL paths to ignore. If a request URL starts with any of these paths, it won't be logged
+		 */
+		ignorePaths?: string[]
+
+		/**
 		 * Prefix for the log messages
 		 */
 		prefix?: string
