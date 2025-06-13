@@ -29,11 +29,12 @@ function fastifyLogger(fastify, options) {
 			`${request.method} | ` +
 			`${request.url}`
 
+		if (options.logRequestPayload) {
+			message += ` | ${JSON.stringify(request.body)}`
+		}
+
 		if (reply.error !== undefined) {
 			message += ` | ${reply.error.message}`
-			if (options.logRequestPayload) {
-				message += ` | ${JSON.stringify(request.body)}`
-			}
 			adapter.error(message)
 
 			return
